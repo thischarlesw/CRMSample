@@ -10,8 +10,20 @@ import {
   Text,
   View
 } from 'react-native';
+import firebase from 'firebase';
+import Login from './Login.js';
 
 export default class App extends Component {
+  componentWillMount() {
+    firebase.initializeApp({
+      apiKey: "AIzaSyCw0xC5OF2mB1Bqs5lAhiBjMecEX0CKRK4",
+      authDomain: "crmsample-bdb09.firebaseapp.com",
+      databaseURL: "https://crmsample-bdb09.firebaseio.com",
+      projectId: "crmsample-bdb09",
+      storageBucket: "",
+      messagingSenderId: "496269226630"
+    });
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -28,6 +40,7 @@ export default class App extends Component {
         <Text style={styles.instructions}>
           (Now Loading from App.js)
         </Text>
+        <Login/>
       </View>
     );
   }
