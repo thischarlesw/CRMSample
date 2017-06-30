@@ -12,8 +12,12 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import Login from './Login.js';
+import Loader from './Loader.js';
+import PeopleList from './PeopleList.js';
 
 export default class App extends Component {
+  state = {loggedIn: null};
+
   componentWillMount() {
     firebase.initializeApp({
       apiKey: "AIzaSyCw0xC5OF2mB1Bqs5lAhiBjMecEX0CKRK4",
@@ -23,44 +27,45 @@ export default class App extends Component {
       storageBucket: "",
       messagingSenderId: "496269226630"
     });
+
+    firebase.auth().onAuthStateChanged((user) =>
+    {
+      if (user) {
+        this.setState({loggedIn: true});
+      } else {
+        this.setState({loggedIn: false});
+      }
+    });
   }
+
+  renderInitialView() {
+    switch(this.state.loggedIn) {
+      case true:
+        return <PeopleList/>;
+      case false:
+        return <Login/>;
+      default:
+        return <Loader size='large'/>;
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to the CRM Sample App!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-        <Text style={styles.instructions}>
-          (Now Loading from App.js)
-        </Text>
-        <Login/>
+        {/*To get started, edit index.ios.js
+        Press Cmd+R to reload
+        Cmd+D or shake for dev menu*/}
+        {this.renderInitialView()}
       </View>
     );
   }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    backgroundColor: '#F5FCFF'
   },
 });
