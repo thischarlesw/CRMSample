@@ -4,6 +4,34 @@ import { MKTextField, MKColor, MKButton } from 'react-native-material-kit';
 import firebase from 'firebase';
 import Loader from './Loader.js';
 
+const myStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center', //vertical
+    alignItems: 'center', //horizontal
+    backgroundColor: '#F5FCFF'
+  },
+  pageInfo: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  fieldInputText: {
+    height: 40,
+    width: 180,
+    color: MKColor.Orange
+  },
+  loginButtonArea: {
+    marginTop: 20,
+  },
+  errorMessage: {
+    marginTop: 15,
+    fontSize: 15,
+    color: 'red',
+    alignSelf: 'center'
+  },
+});
+
 const LoginButton = MKButton.coloredButton()
   .withText('LOGIN')
   .build();
@@ -84,31 +112,3 @@ export default class Login extends Component {
     );
   }
 }
-
-const myStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center', //vertical
-    alignItems: 'center', //horizontal
-    backgroundColor: '#F5FCFF'
-  },
-  pageInfo: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  fieldInputText: {
-    height: 40,
-    width: 180,
-    color: MKColor.Orange
-  },
-  loginButtonArea: {
-    marginTop: 20,
-  },
-  errorMessage: {
-    marginTop: 15,
-    fontSize: 15,
-    color: 'red',
-    alignSelf: 'center'
-  },
-});

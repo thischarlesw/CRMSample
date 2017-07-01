@@ -5,15 +5,25 @@
  */
 
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import firebase from 'firebase';
+
 import Login from './Login.js';
 import Loader from './Loader.js';
 import PeopleList from './PeopleList.js';
+import reducers from '../reducers/PeopleReducer.js'
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+});
+const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default class App extends Component {
   state = {loggedIn: null};
@@ -51,21 +61,14 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {/*To get started, edit index.ios.js
-        Press Cmd+R to reload
-        Cmd+D or shake for dev menu*/}
-        {this.renderInitialView()}
-      </View>
+      <Provider store = {store}>
+        <View style={styles.container}>
+          {/*To get started, edit index.ios.js
+          Press Cmd+R to reload
+          Cmd+D or shake for dev menu*/}
+          {this.renderInitialView()}
+        </View>
+      </Provider>
     );
   }
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-});

@@ -18,4 +18,3 @@ const Loader = ({size}) => {
 };
 
 export default Loader;
-
