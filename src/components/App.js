@@ -12,7 +12,10 @@ import firebase from 'firebase';
 
 import Login from './Login.js';
 import Loader from './Loader.js';
+import TabBar from './Navigation.js';
 import PeopleList from './PeopleList.js';
+import CompanyList from './CompanyList.js';
+import AddPerson from './AddPerson.js';
 import reducers from '../reducers/PeopleReducer.js'
 
 const styles = StyleSheet.create({
@@ -23,6 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF'
   },
 });
+
 const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default class App extends Component {
@@ -51,7 +55,9 @@ export default class App extends Component {
   renderInitialView() {
     switch(this.state.loggedIn) {
       case true:
-        return <PeopleList/>;
+        return <TabBar/>;
+        // return <PeopleList/>;
+        // return <CompanyList/>;
       case false:
         return <Login/>;
       default:
@@ -62,12 +68,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store = {store}>
-        <View style={styles.container}>
-          {/*To get started, edit index.ios.js
-          Press Cmd+R to reload
-          Cmd+D or shake for dev menu*/}
+        {/*<View style={styles.container}>*/}
           {this.renderInitialView()}
-        </View>
+        {/*</View>*/}
       </Provider>
     );
   }

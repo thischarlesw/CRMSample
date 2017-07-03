@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import PeopleItem from './PeopleItem.js';
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,6 +19,17 @@ const mapStateToProps = state => {
 };
 
 class PeopleList extends Component {
+  static navigationOptions = {
+      tabBarLabel: 'People',
+      tabBarIcon: ({tintColor}) => (
+        <Icon
+          name = {'user'}
+          size = {45}
+          style = {{color: tintColor}}
+        />
+      ),
+  };
+
   componentWillMount() {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
