@@ -23,7 +23,7 @@ export default class CompanyList extends Component {
       tabBarIcon: ({tintColor}) => (
         <Icon
           name = {'business'}
-          size = {45}
+          size = {40}
           style = {{color: tintColor}}
         />
       ),

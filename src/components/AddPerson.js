@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,8 +25,8 @@ export default class AddPerson extends Component {
       tabBarLabel: 'Add Person',
       tabBarIcon: ({tintColor}) => (
         <Icon
-          name = {'plus'}
-          size = {70}
+          name = {'add-circle'}
+          size = {45}
           style = {[{color: tintColor}, styles.icon]}
         />
       )

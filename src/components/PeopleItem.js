@@ -1,13 +1,15 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import * as actions from '../actions';
 
+const theme = getTheme();
+
 const styles = StyleSheet.create({
   card: {
-    marginTop: 20
+    marginTop: 20,
   },
   title: {
     top: 20,
@@ -30,29 +32,26 @@ const styles = StyleSheet.create({
   }
 });
 
-const theme = getTheme();
 const PeopleItem = (props) => {
   return (
-    <View style = {[theme.cardStyle, styles.card]}>
-      <Image 
-        style = {[theme.cardImageStyle, styles.image]}
-        source = {{ uri:'/Users/charlesw/Projects/personal/ReactNative/CRMSample/src/images/background.jpg'}}
-      />
-      <Icon
-        style = {styles.icon}
-        name = {'user'}
-        size = {100}
-      />
-      <Text stye = {[theme.cardTitleStyle, styles.title]}>
-        {props.people.first_name} {props.people.last_name}
-      </Text>
-      <Text stye = {[theme.cardActionStyle, styles.card]}>
-        {props.people.company}
-      </Text>
-      <Text>
-        {props.test[1]}
-      </Text>
-    </View>
+    <TouchableWithoutFeedback
+      onPress = {() => props.selectPerson(props.people)}
+    >
+      <View style={[theme.cardStyle, styles.card]}>
+        <Image 
+          style = {styles.image}
+          source = {{uri:'/Users/charlesw/Projects/personal/ReactNative/CRMSample/src/images/background.jpg'}}
+        />
+        <Icon
+          style = {styles.icon}
+          name = {'user'}
+          size = {100}
+        />
+        <Text style={[theme.cardTitleStyle, styles.title]}>{props.people.first_name} {props.people.last_name}</Text>
+        <Text style={[theme.cardActionStyle, styles.action]}>{props.people.company}</Text>
+         <Text>{props.test[0]}</Text> 
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 

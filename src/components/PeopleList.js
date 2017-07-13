@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import PeopleItem from './PeopleItem.js';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import PeopleDetail from './PeopleDetail.js'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,44 +15,56 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => {
-  return {people: state.people};
-};
-
 class PeopleList extends Component {
   static navigationOptions = {
       tabBarLabel: 'People',
       tabBarIcon: ({tintColor}) => (
         <Icon
-          name = {'user'}
-          size = {45}
+          name = {'people'}
+          size = {40}
           style = {{color: tintColor}}
         />
       ),
   };
 
-  componentWillMount() {
+  renderInitialView() {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
     this.dataSource = ds.cloneWithRows(this.props.people);
-  }
-  render() {
-    return (
-      <View style = {styles.container}>
+
+    if (this.props.detailView === true) {
+      return <PeopleDetail/>;
+    } else {
+      return (
         <ListView
           enableEmptySections = {true}
           dataSource = {this.dataSource}
           renderRow = {(rowData) =>
             <PeopleItem 
               people = {rowData}
-              test= {['hello', 'goodbye']}
+              test= {['test', 'testing']}
             />
           }
         />
+      )
+    }
+  }
+
+  render() {
+    return (
+      <View style = {styles.container}>
+        {this.renderInitialView()}
       </View>
     );
   }
+};
+
+const mapStateToProps = state => {
+  return {
+    people: state.people,
+    detailView: state.detailView
+  };
 };
 
 export default connect(mapStateToProps)(PeopleList);

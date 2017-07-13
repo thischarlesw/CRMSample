@@ -12,7 +12,7 @@ const TabBar = TabNavigator({
     activeTintColor: '#e91e63',
     inactiveTintColor: 'white',
     tabBarVisible: 'true',
-    // showLabel: true,
+    showLabel: false,
     // swipeEnabled: true, //allows swiping between screens
     style: {
       backgroundColor: '#26a69a',
